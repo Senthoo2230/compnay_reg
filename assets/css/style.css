@@ -1,0 +1,73 @@
+@import url(https://fast.fonts.net/lt/1.css?apiType=css&c=bbfe319c-1319-4ed3-88a6-6904534bc96d&fontids=793308,793320);
+@font-face{
+    font-family:Camphor;
+    src:url(/e1b938cb78aa52fa641981fc0e1cd46e34320c42/bdca6/static/media/1a75b1be-660a-4bbb-89eb-ac51af5dd23c.c28bec07.eot#iefix);
+    src:url(/e1b938cb78aa52fa641981fc0e1cd46e34320c42/bdca6/static/media/1a75b1be-660a-4bbb-89eb-ac51af5dd23c.c28bec07.eot#iefix) format("eot"),url(/b93e0dcdf32fc6a544a1b8494c708d614def461e/07050/static/media/7afb413d-536f-439c-bcca-ba53e24cda07.aee42ebc.woff2) format("woff2"),url(/a0a4ce431f16def36b84774e4ba8542914ee2664/ed427/static/media/4eea462d-03c9-489a-a928-185525ee60b0.3a28ce75.woff) format("woff"),url(/6826b15072b031465d887c9310a5057ed97c2bc5/19768/static/media/b2be4b07-b8c4-4d15-beaa-8e29cc0d9b5c.07e9e8f9.ttf) format("truetype")
+}
+@font-face{
+    font-family:Camphor;
+    font-weight:700;
+    src:url(/dc48371f49e8c098b7e4c218a88cc27f7c3995c4/5759e/static/media/2dfbc407-f527-4d2b-82c8-5d38905b6741.4352d2ff.eot#iefix);
+    src:url(/dc48371f49e8c098b7e4c218a88cc27f7c3995c4/5759e/static/media/2dfbc407-f527-4d2b-82c8-5d38905b6741.4352d2ff.eot#iefix) format("eot"),url(/6722e6d4fabde6befc1aad6682f3a2860b7d5444/e0a9d/static/media/30a72170-8872-4260-8db3-dc070ad9d5ac.0aa9fcd5.woff2) format("woff2"),url(/74be5ad7af23e6b9da8bea9b66c807ada0378169/d6a1e/static/media/f4e7a76f-8831-4641-87b8-d45d17b148cc.8d7265e0.woff) format("woff"),url(/e4ac2f40b788d7cd27b130336820e8615e140e98/293d7/static/media/7bfa40d6-635d-4d32-9ce5-4b58a1332d0d.5d048b93.ttf) format("truetype")
+}
+body{
+    margin:0;
+    height:100%;
+    min-height:100vh;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale
+}
+body,textarea{
+    font-family:Camphor,"Open Sans",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif
+}
+body.modal-open{
+    overflow:hidden
+}
+a{
+    text-decoration:none
+}
+.react-phonenr-input{
+    max-width:none!important;
+    box-shadow:0 3px 5px 0 rgb(0 0 0/4%)
+}
+.react-phonenr-input ul{
+    max-height:290px
+}
+#root{
+    height:100%
+}
+@media (max-width:1279px){
+    *,:after,:before{
+        box-sizing:inherit
+    }
+    html{
+        box-sizing:border-box
+    }
+    h1,h2,h3,h4,h5,h6,p{
+        margin:0
+    }
+}
+:root{
+    --primary:#005eff;
+    --primary-00:rgba(0,94,255,0);
+    --primary-04:rgba(0,94,255,0.4);
+    --primary-light:#edf4ff;
+    --primary-dark:#0452d7;
+    --primary-border:rgba(0,94,255,0.25);
+    --secondary:#0cc572;
+    --secondary-light:#eafff3;
+    --secondary-border:rgba(12,197,114,0.25);
+    --error:#f02f2f;
+    --error-light:#ffeded;
+    --error-border:rgba(240,47,47,0.25);
+    --background:#f6f8fa;
+    --background-dark:#f9fbff;
+    --default-border:#d4ddeb;
+    --white:#fff;
+    --text-primary:#434b65;
+    --text-secondary:#757a89;
+    --text-light-secondary:#b8d2ff;
+    --text-info:#52649e;
+    --text-disabled:#cfd5de
+}
