@@ -18,11 +18,11 @@ class Home_model extends CI_Model
         return $row->id;
     }
 
-    public function insert_type($type_id)
+    public function insert_type($type)
     {
         $user_id = $this->session->user_id;
 
-        $sql = "INSERT INTO user_company_type (user_id, type_id) VALUES ('$user_id','$type_id')";
+        $sql = "INSERT INTO user_company_type (user_id, type) VALUES ('$user_id','$type')";
         $result = $this->db->query($sql);
         return $result;
     }
@@ -175,6 +175,66 @@ class Home_model extends CI_Model
         $sql = "UPDATE shareholders
         SET status = 1
         WHERE user_id = $user_id";
+        $this->db->query($sql);
+    }
+
+    public function owner_count()
+    {
+        $user_id = $this->session->user_id;
+        $sql = "SELECT id
+        FROM owners
+        WHERE user_id = $user_id";
+        $query = $this->db->query($sql);
+        $count = $query->num_rows();
+
+        return $count;
+    }
+
+    public function delete_owner($owner_id)
+    {
+        $sql = "DELETE FROM owners WHERE id = $owner_id";
+        $this->db->query($sql);
+    }
+
+    public function dir_count()
+    {
+        $user_id = $this->session->user_id;
+        $sql = "SELECT id
+        FROM directors
+        WHERE user_id = $user_id";
+        $query = $this->db->query($sql);
+        $count = $query->num_rows();
+
+        return $count;
+    }
+
+    public function delete_dir($dir_id)
+    {
+        $sql = "DELETE FROM directors WHERE id = $dir_id";
+        $this->db->query($sql);
+    }
+
+    public function sec_count()
+    {
+        $user_id = $this->session->user_id;
+        $sql = "SELECT id
+        FROM secretary
+        WHERE user_id = $user_id";
+        $query = $this->db->query($sql);
+        $count = $query->num_rows();
+
+        return $count;
+    }
+
+    public function delete_sec($sec_id)
+    {
+        $sql = "DELETE FROM secretary WHERE id = $sec_id";
+        $this->db->query($sql);
+    }
+
+    public function delete_sh($sh)
+    {
+        $sql = "DELETE FROM shareholders WHERE id = $sh";
         $this->db->query($sql);
     }
                     

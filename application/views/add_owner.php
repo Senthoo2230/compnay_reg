@@ -1,43 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-
-    </style>
-    <title>4th</title>
-</head>
-
 <body>
     <div class="row">
         <div class="col-md-4">
-            <div style="font-size: 25px; color:#cfd5de; padding: 50px 50px;">
+            <div style="font-size: 25px; color:#cfd5de; padding: 50px 50px; font-weight:700;">
                 <div style="padding:25px;">
                     1. Company Type
                     <span class="text-success">
-                    <i class="fa-solid fa-check"></i>
+                        <i class="fa-solid fa-check"></i>
                     </span>
                 </div>
                 <div style="padding:25px;">
                     2. Company Details
                     <span class="text-success">
-                    <i class="fa-solid fa-check"></i>
+                        <i class="fa-solid fa-check"></i>
                     </span>
                 </div>
-                <div style="padding:25px; color:blue;">
+                <div style="padding:25px;" class="navActive">
                     3. Owners
                 </div>
                 <div style="padding:25px;">
@@ -56,6 +33,17 @@
                 </div>
                 <hr>
 
+                <div>
+                    <?php if ($owner_count > 0) {
+                        $owner_err = "";
+                        //echo "director";
+                    } else {
+                        $owner_err = "<div class='alert alert-danger'>Please Add a Owner</div>";
+                        //echo "owner";
+                    }
+                    echo $owner_err;
+                    ?>
+                </div>
                 <div>
                     <table class="table table-hover">
                         <thead>
@@ -98,10 +86,13 @@
                         <div style="width: 250px;">
                             <select class="form-control" name="origin" id="origin" onchange="checkOrigin()">
                                 <option value="">Select Your Owner from</option>
-                                <option value="1">Srilankan</option>
-                                <option value="2">Forginer</option>
-                                <option value="3">Company</option>
+                                <option value="Srilankan">Srilankan</option>
+                                <option value="Forginer">Forginer</option>
+                                <option value="Company">Company</option>
                             </select>
+                            <div style="margin-top: 5px; font-size:12px; color:red;">
+                                <?php echo form_error('origin'); ?>
+                            </div>
                         </div>
 
                         <script>
@@ -157,12 +148,19 @@
                     </form>
                 </div>
 
-                <div style="margin-top:10px;" class="float-right">
-    <a href="<?php echo base_url(); ?>home/director" class="btn btn-warning">Next</a>
-</div>
+                <div style="margin-top:10px;">
+
+                    <a href="<?php echo base_url(); ?>home/<?php if ($owner_count > 0) {
+                                                                //$owner_err = "";
+                                                                echo "director";
+                                                            } else {
+                                                                //$owner_err = "<div class='alert alert-danger'>Please Add a Owner</div>";
+                                                                echo "owner";
+                                                            } ?>" class="btn btn-warning">Next</a>
+                </div>
             </div>
         </div>
-        
+
     </div>
 </body>
 

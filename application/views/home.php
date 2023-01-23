@@ -1,116 +1,11 @@
 <html lang="en-US">
   <head>
     <meta charset="UTF-8">
-    <script>
-      var gform;
-      gform || (document.addEventListener("gform_main_scripts_loaded", function() {
-        gform.scriptsLoaded = !0
-      }), window.addEventListener("DOMContentLoaded", function() {
-        gform.domLoaded = !0
-      }), gform = {
-        domLoaded: !1,
-        scriptsLoaded: !1,
-        initializeOnLoaded: function(o) {
-          gform.domLoaded && gform.scriptsLoaded ? o() : !gform.domLoaded && gform.scriptsLoaded ? window.addEventListener("DOMContentLoaded", o) : document.addEventListener("gform_main_scripts_loaded", o)
-        },
-        hooks: {
-          action: {},
-          filter: {}
-        },
-        addAction: function(o, n, r, t) {
-          gform.addHook("action", o, n, r, t)
-        },
-        addFilter: function(o, n, r, t) {
-          gform.addHook("filter", o, n, r, t)
-        },
-        doAction: function(o) {
-          gform.doHook("action", o, arguments)
-        },
-        applyFilters: function(o) {
-          return gform.doHook("filter", o, arguments)
-        },
-        removeAction: function(o, n) {
-          gform.removeHook("action", o, n)
-        },
-        removeFilter: function(o, n, r) {
-          gform.removeHook("filter", o, n, r)
-        },
-        addHook: function(o, n, r, t, i) {
-          null == gform.hooks[o][n] && (gform.hooks[o][n] = []);
-          var e = gform.hooks[o][n];
-          null == i && (i = n + "_" + e.length), gform.hooks[o][n].push({
-            tag: i,
-            callable: r,
-            priority: t = null == t ? 10 : t
-          })
-        },
-        doHook: function(n, o, r) {
-          var t;
-          if (r = Array.prototype.slice.call(r, 1), null != gform.hooks[n][o] && ((o = gform.hooks[n][o]).sort(function(o, n) {
-              return o.priority - n.priority
-            }), o.forEach(function(o) {
-              "function" != typeof(t = o.callable) && (t = window[t]), "action" == n ? t.apply(null, r) : r[0] = t.apply(null, r)
-            })), "filter" == n) return r[0]
-        },
-        removeHook: function(o, n, t, i) {
-          var r;
-          null != gform.hooks[o][n] && (r = (r = gform.hooks[o][n]).filter(function(o, n, r) {
-            return !!(null != i && i != o.tag || null != t && t != o.priority)
-          }), gform.hooks[o][n] = r)
-        }
-      });
-    </script>
+    
     <title>1 First Step – #360 Consultations</title>
     <meta name="robots" content="max-image-preview:large">
-    <link rel="alternate" type="application/rss+xml" title="#360 Consultations » Feed" href="https://yuk.liz.mybluehost.me/Check/feed/">
-    <link rel="alternate" type="application/rss+xml" title="#360 Consultations » Comments Feed" href="https://yuk.liz.mybluehost.me/Check/comments/feed/">
-    <script>
-      window._wpemojiSettings = {
-        "baseUrl": "https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/",
-        "ext": ".png",
-        "svgUrl": "https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/",
-        "svgExt": ".svg",
-        "source": {
-          "concatemoji": "https:\/\/yuk.liz.mybluehost.me\/Check\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.1.1"
-        }
-      };
-      /*! This file is auto-generated */
-      ! function(e, a, t) {
-        var n, r, o, i = a.createElement("canvas"),
-          p = i.getContext && i.getContext("2d");
-
-        function s(e, t) {
-          var a = String.fromCharCode,
-            e = (p.clearRect(0, 0, i.width, i.height), p.fillText(a.apply(this, e), 0, 0), i.toDataURL());
-          return p.clearRect(0, 0, i.width, i.height), p.fillText(a.apply(this, t), 0, 0), e === i.toDataURL()
-        }
-
-        function c(e) {
-          var t = a.createElement("script");
-          t.src = e, t.defer = t.type = "text/javascript", a.getElementsByTagName("head")[0].appendChild(t)
-        }
-        for (o = Array("flag", "emoji"), t.supports = {
-            everything: !0,
-            everythingExceptFlag: !0
-          }, r = 0; r < o.length; r++) t.supports[o[r]] = function(e) {
-          if (p && p.fillText) switch (p.textBaseline = "top", p.font = "600 32px Arial", e) {
-            case "flag":
-              return s([127987, 65039, 8205, 9895, 65039], [127987, 65039, 8203, 9895, 65039]) ? !1 : !s([55356, 56826, 55356, 56819], [55356, 56826, 8203, 55356, 56819]) && !s([55356, 57332, 56128, 56423, 56128, 56418, 56128, 56421, 56128, 56430, 56128, 56423, 56128, 56447], [55356, 57332, 8203, 56128, 56423, 8203, 56128, 56418, 8203, 56128, 56421, 8203, 56128, 56430, 8203, 56128, 56423, 8203, 56128, 56447]);
-            case "emoji":
-              return !s([129777, 127995, 8205, 129778, 127999], [129777, 127995, 8203, 129778, 127999])
-          }
-          return !1
-        }(o[r]), t.supports.everything = t.supports.everything && t.supports[o[r]], "flag" !== o[r] && (t.supports.everythingExceptFlag = t.supports.everythingExceptFlag && t.supports[o[r]]);
-        t.supports.everythingExceptFlag = t.supports.everythingExceptFlag && !t.supports.flag, t.DOMReady = !1, t.readyCallback = function() {
-          t.DOMReady = !0
-        }, t.supports.everything || (n = function() {
-          t.readyCallback()
-        }, a.addEventListener ? (a.addEventListener("DOMContentLoaded", n, !1), e.addEventListener("load", n, !1)) : (e.attachEvent("onload", n), a.attachEvent("onreadystatechange", function() {
-          "complete" === a.readyState && t.readyCallback()
-        })), (e = t.source || {}).concatemoji ? c(e.concatemoji) : e.wpemoji && e.twemoji && (c(e.twemoji), c(e.wpemoji)))
-      }(window, document, window._wpemojiSettings);
-    </script>
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-includes/js/wp-emoji-release.min.js?ver=6.1.1" type="text/javascript" defer=""></script>
+    
+    
     <style>
       img.wp-smiley,
       img.emoji {
@@ -478,19 +373,7 @@
     <link rel="stylesheet" id="gp-advanced-phone-field-css" href="https://yuk.liz.mybluehost.me/Check/wp-content/plugins/gp-advanced-phone-field/styles/frontend.min.css?ver=1.0.6" media="all">
     <link rel="stylesheet" id="google-fonts-1-css" href="https://fonts.googleapis.com/css?family=Inter%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CHeebo%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CNunito+Sans%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CPoppins%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&amp;display=swap&amp;ver=6.1.1" media="all">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-includes/js/jquery/jquery.min.js?ver=3.6.1" id="jquery-core-js"></script>
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" id="jquery-migrate-js"></script>
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-includes/js/underscore.min.js?ver=1.13.4" id="underscore-js"></script>
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-includes/js/backbone.min.js?ver=1.4.1" id="backbone-js"></script>
-   
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-includes/js/api-request.min.js?ver=6.1.1" id="wp-api-request-js"></script>
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-includes/js/wp-api.min.js?ver=6.1.1" id="wp-api-js"></script>
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-content/plugins/wp-data-access/public/../assets/js/wpda_rest_api.js?ver=5.2.11" id="wpda_rest_api-js"></script>
-    <script defer="defer" src="https://yuk.liz.mybluehost.me/Check/wp-content/plugins/gravityforms/js/jquery.json.min.js?ver=2.6.9" id="gform_json-js"></script>
     
-    <script id="gform_gravityforms-js-before"></script>
-    <script defer="defer" src="https://yuk.liz.mybluehost.me/Check/wp-content/plugins/gravityforms/js/gravityforms.min.js?ver=2.6.9" id="gform_gravityforms-js"></script>
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-content/plugins/gp-easy-passthrough/js/vendor/js.cookie.js?ver=1.9.16" id="gpep_vendor_cookie-js"></script>
     <link rel="https://api.w.org/" href="https://yuk.liz.mybluehost.me/Check/wp-json/">
     <link rel="alternate" type="application/json" href="https://yuk.liz.mybluehost.me/Check/wp-json/wp/v2/pages/832">
     <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://yuk.liz.mybluehost.me/Check/xmlrpc.php?rsd">
@@ -845,7 +728,7 @@
                             </div>
                             <div id="field_2_6" class="gfield gfield--width-half gfield_contains_required field_sublabel_below field_description_below hidden_label gfield_visibility_visible" data-js-reload="field_2_6">
                               <label class="gfield_label" for="input_2_6">Email <span class="gfield_required">
-                                  <span class="gfield_required gfield_required_text">(Required)</span>
+                                  
                                 </span>
                               </label>
                               <div class="ginput_container ginput_container_email">
@@ -857,7 +740,7 @@
                             </div>
                             <div id="field_2_4" class="gfield gfield--width-half gfield_contains_required field_sublabel_below field_description_below hidden_label gfield_visibility_visible" data-js-reload="field_2_4">
                               <label class="gfield_label" for="input_2_4">Mobile <span class="gfield_required">
-                                  <span class="gfield_required gfield_required_text">(Required)</span>
+                                  
                                 </span>
                               </label>
                               <div class="ginput_container ginput_container_phone">
@@ -2604,27 +2487,6 @@
     
     <link rel="stylesheet" id="jeg-dynamic-style-css" href="https://yuk.liz.mybluehost.me/Check/wp-content/plugins/jeg-elementor-kit/lib/jeg-framework/assets/css/jeg-dynamic-styles.css?ver=1.2.9" media="all">
     <link rel="stylesheet" id="e-animations-css" href="https://yuk.liz.mybluehost.me/Check/wp-content/plugins/elementor/assets/lib/animations/animations.min.css?ver=3.9.2" media="all">
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-content/themes/hello-elementor/assets/js/hello-frontend.min.js?ver=1.0.0" id="hello-theme-frontend-js"></script>
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.9" id="regenerator-runtime-js"></script>
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0" id="wp-polyfill-js"></script>
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-includes/js/dist/dom-ready.min.js?ver=392bdd43726760d1f3ca" id="wp-dom-ready-js"></script>
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-includes/js/dist/hooks.min.js?ver=4169d3cf8e8d95a3d6d5" id="wp-hooks-js"></script>
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-includes/js/dist/i18n.min.js?ver=9e794f35a71bb98672ae" id="wp-i18n-js"></script>
     
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-includes/js/dist/a11y.min.js?ver=ecce20f002eda4c19664" id="wp-a11y-js"></script>
-    <script defer="defer" src="https://yuk.liz.mybluehost.me/Check/wp-content/plugins/gravityforms/js/placeholders.jquery.min.js?ver=2.6.9" id="gform_placeholder-js"></script>
-    
-    <script defer="defer" src="https://yuk.liz.mybluehost.me/Check/wp-content/plugins/gp-advanced-phone-field/js/built/gp-advanced-phone-field.js?ver=1.0.6" id="gp-advanced-phone-field-js"></script>
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js?ver=3.9.2" id="elementor-webpack-runtime-js"></script>
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-content/plugins/elementor/assets/js/frontend-modules.min.js?ver=3.9.2" id="elementor-frontend-modules-js"></script>
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-content/plugins/elementor/assets/lib/waypoints/waypoints.min.js?ver=4.0.2" id="elementor-waypoints-js"></script>
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-includes/js/jquery/ui/core.min.js?ver=1.13.2" id="jquery-ui-core-js"></script>
-    
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=3.9.2" id="elementor-frontend-js"></script>
-    <span id="elementor-device-mode" class="elementor-screen-only"></span>
-    
-    <script src="https://yuk.liz.mybluehost.me/Check/wp-content/plugins/jeg-elementor-kit/assets/js/elements/sticky-element.js?ver=2.5.12" id="jkit-sticky-element-js"></script>
-    
-    <script class="iti-load-utils" async="" src="https://yuk.liz.mybluehost.me/Check/wp-content/plugins/gp-advanced-phone-field/js/built/gpapf-intl-tel-input-utils.js"></script>
   </body>
 </html>

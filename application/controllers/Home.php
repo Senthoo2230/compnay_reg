@@ -49,18 +49,31 @@ class Home extends CI_Controller {
 
     public function company_type()
     {
-        $this->load->view('head');
+        $data['title'] = "#3 Company Type";
+        if(!$this->session->userdata('user_id')){
+            redirect('home');
+        }
+        $this->load->view('head',$data);
         $this->load->view('2nd_step');
-        $this->load->view('footer');
     }
 
     public function company_details()
     {
+        $data['title'] = "#3 Company Details";
+        if(!$this->session->userdata('user_id')){
+            redirect('home');
+        }
+        $this->load->view('head',$data);
         $this->load->view('3rd_step');
     }
 
     public function company_address()
     {
+        if(!$this->session->userdata('user_id')){
+            redirect('home');
+        }
+        $data['title'] = "#3 Company Address";
+        $this->load->view('head', $data);
         $this->load->view('4th_step');
     }
 
@@ -69,15 +82,19 @@ class Home extends CI_Controller {
         if(!$this->session->userdata('user_id')){
             redirect('home');
         }
+        $data['title'] = "#3 Owners";
         $data['owners'] = $this->Home_model->get_owners();
+        $data['owner_count'] = $this->Home_model->owner_count();
+
+        $this->load->view('head', $data);
         $this->load->view('add_owner',$data);
     }
 
     public function second_step()
     {
-        $type_id = $this->input->post('company_type');
+        $type = $this->input->post('company_type');
 
-        if ($this->Home_model->insert_type($type_id)) {
+        if ($this->Home_model->insert_type($type)) {
             // Third Step
             redirect('home/company_details');
         }
@@ -92,12 +109,18 @@ class Home extends CI_Controller {
     {
         $this->form_validation->set_rules('company_name', 'Company Name', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required');
-        $this->form_validation->set_rules('phone', 'Phone', 'required');
+        $this->form_validation->set_rules('phone', 'Phone', 'required|numeric|max_length[10]', 
+        array(
+            'numeric' => 'Phone number must be in numbers',
+            'max_length' => 'Enter valid phone number',
+        ));
         $this->form_validation->set_rules('description', 'Business activity', 'required');
 
         if ($this->form_validation->run() == FALSE)
         {
-            $this->load->view('3rd_step'); 
+            // $this->load->view('head');
+            // $this->load->view('3rd_step'); 
+            $this->company_details();
         }
         else
         {
@@ -130,7 +153,7 @@ class Home extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE)
         {
-            $this->load->view('4th_step'); 
+            $this->company_address();
         }
         else
         {
@@ -149,7 +172,7 @@ class Home extends CI_Controller {
             }
             else{
                 // Not Inserted
-                $this->load->view('4th_step');
+                $this->company_address();
             }
 
         }
@@ -157,13 +180,21 @@ class Home extends CI_Controller {
 
     public function add_owner()
     {
-        $this->form_validation->set_rules('origin', 'Origin', 'required');
+        $this->form_validation->set_rules('origin', 'Origin', 'required',
+        array(
+            'required' => 'Select your owner from'
+        ));
         $this->form_validation->set_rules('identity', 'Identity', 'required');
         $this->form_validation->set_rules('fname', 'Firstname', 'required');
         $this->form_validation->set_rules('lname', 'Lastname', 'required');
+        $this->form_validation->set_rules('percentage', 'Percentage', 'numeric|min_length[1]|max_length[2]',
+    array(
+        'numeric' => 'Percentage must be in numbers',
+        'max_length' => 'Enter valid percentage',
+    ));
 
         if ($this->form_validation->run() == FALSE){
-            $this->load->view('add_owner'); 
+            $this->owner(); 
         }
         else{
             $origin = $this->input->post('origin');
@@ -187,8 +218,12 @@ class Home extends CI_Controller {
         if(!$this->session->userdata('user_id')){
             redirect('home');
         }
+        $data['title'] = "#3 Director";
         $data['directors'] = $this->Home_model->get_directors();
+        $data['dir_count'] = $this->Home_model->dir_count();
         $this->Home_model->save_owners();
+
+        $this->load->view('head', $data);
         $this->load->view('add_director',$data);
     }
 
@@ -199,7 +234,7 @@ class Home extends CI_Controller {
         $this->form_validation->set_rules('lname', 'Lastname', 'required');
 
         if ($this->form_validation->run() == FALSE){
-            $this->load->view('add_director'); 
+            $this->director(); 
         }
         else{
             $title = $this->input->post('title');
@@ -207,10 +242,10 @@ class Home extends CI_Controller {
             $lname = $this->input->post('lname');
 
             if($this->Home_model->insert_director($title,$fname,$lname)){
-                redirect('home/director');
+                $this->director();
             }
             else{
-                redirect('home/owner');
+                $this->director();
             }
         }
     }
@@ -222,7 +257,7 @@ class Home extends CI_Controller {
         $this->form_validation->set_rules('lname', 'Lastname', 'required');
 
         if ($this->form_validation->run() == FALSE){
-            $this->load->view('add_secretary'); 
+            $this->secretary(); 
         }
         else{
             $title = $this->input->post('title');
@@ -245,7 +280,7 @@ class Home extends CI_Controller {
         $this->form_validation->set_rules('city', 'City', 'required');
 
         if ($this->form_validation->run() == FALSE){
-            $this->load->view('add_sh'); 
+            $this->shareholders(); 
         }
         else{
             $address = $this->input->post('address');
@@ -268,8 +303,13 @@ class Home extends CI_Controller {
         if(!$this->session->userdata('user_id')){
             redirect('home');
         }
+        $data['title'] = "#3 Secretary";
+        $data['sec_count'] = $this->Home_model->sec_count();
         $data['secretary'] = $this->Home_model->get_secretary();
+
         $this->Home_model->save_directors();
+
+        $this->load->view('head', $data);
         $this->load->view('add_secretary',$data);
     }
 
@@ -278,17 +318,50 @@ class Home extends CI_Controller {
         if(!$this->session->userdata('user_id')){
             redirect('home');
         }
+        $data['title'] = "#4 ShareHolders";
+
         $data['shs'] = $this->Home_model->get_sh();
         $this->Home_model->save_secretary();
+
+        $this->load->view('head', $data);
         $this->load->view('add_sh',$data);
     }
 
     public function end()
     {
+        if(!$this->session->userdata('user_id')){
+            redirect('home');
+        }
+
+        $data['title'] = "End";
         $this->Home_model->save_sh();
+        $this->load->view('head', $data);
         $this->load->view('end');
+        
         $this->session->sess_destroy();
     }
+
+    public function delete_owner($owner_id){
+        $this->Home_model->delete_owner($owner_id);
+        redirect('home/owner');
+    }
+
+    public function delete_director($dir_id){
+        $this->Home_model->delete_dir($dir_id);
+        redirect('home/director');
+    }
+
+    public function delete_secretary($sec_id){
+        $this->Home_model->delete_sec($sec_id);
+        redirect('home/secretary');
+    }
+
+    public function delete_sh($sh_id){
+        $this->Home_model->delete_sh($sh_id);
+        redirect('home/shareholders');
+    }
+
+    
 }
 
 /* End of file Home.php and path \application\controllers\Home.php */
