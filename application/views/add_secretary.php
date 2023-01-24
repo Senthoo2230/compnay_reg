@@ -1,16 +1,16 @@
 <body>
     <div class="row">
-        <div class="col-md-4">
-            <div style="font-size: 25px; color:#cfd5de; padding: 50px 50px; font-weight:700;">
+    <div class="col-md-4 d-flex align-items-center justify-content-center" style="background-color:#fff;">
+            <div class="sen-nav-items">
                 <div style="padding:25px;">
                     1. Company Type
-                    <span class="text-success">
+                    <span style="color:#03C988;">
                         <i class="fa-solid fa-check"></i>
                     </span>
                 </div>
                 <div style="padding:25px;">
                     2. Company Details
-                    <span class="text-success">
+                    <span style="color:#03C988;">
                         <i class="fa-solid fa-check"></i>
                     </span>
                 </div>
@@ -83,7 +83,7 @@
                     <form action="<?php echo base_url(); ?>home/add_secretary " method="post">
                         <div class="row" style="margin-top: 20px;">
                             <div class="col-md-3">
-                                <select class="form-control" name="title" id="title">
+                                <select class="form-select" name="title" id="title">
                                     <option value="">Select Title</option>
                                     <option value="Mr">Mr</option>
                                     <option value="Miss">Miss</option>
@@ -113,24 +113,16 @@
                     </form>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-3"></div>
-                    <div class="col-md-3"></div>
-                    <div class="col-md-3">
-                    <a style="width:100%; font-weight:700; margin-top:30px;" href="<?php echo base_url(); ?>home/<?php if ($sec_count > 0) {
 
-echo "shareholders";
-} else {
-
-echo "secretary";
-} ?>" class="btn btn-warning mt-2">Next</a>
-                    </div>
-                </div>
-
-                <div style="margin-top:25px; float: right;">
-                    
-                </div>
+                <div style="margin-top:20px; float: right;">
+                            <a href="<?php echo base_url(); ?>home/<?php if ($sec_count > 0) {
+                                                                //$owner_err = "";
+                                                                echo "shareholders";
+                                                            } else {
+                                                                //$owner_err = "<div class='alert alert-danger'>Please Add a Owner</div>";
+                                                                echo "secretary";
+                                                            } ?>" class="theme-btn">Next <i style="margin-left: 5px;" class="fa-solid fa-angle-right"></i></a>
+                        </div>
             </div>
         </div>
 

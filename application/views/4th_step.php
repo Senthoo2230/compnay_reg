@@ -1,10 +1,10 @@
 <body>
-    <div class="row">
-        <div class="col-md-4">
-            <div style="font-size: 25px; color:#cfd5de; padding: 50px 50px;">
+    <div class="row" style="height: 100vh;">
+    <div class="col-md-4 d-flex align-items-center justify-content-center" style="background-color:#fff;">
+            <div class="sen-nav-items">
                 <div style="padding:25px;">
                     1. Company Type
-                    <span class="text-success">
+                    <span style="color:#03C988;">
                         <i class="fa-solid fa-check"></i>
                     </span>
                 </div>
@@ -54,7 +54,7 @@
 
                         <div class="row">
                             <div class="col-md-4 rowMarginbt">
-                                <select name="district" class="form-control">
+                                <select name="district" class="form-select">
                                     <option value="">Select District</option>
                                     <option value="Jaffna">Jaffna</option>                                                                        
                                 </select>
@@ -64,7 +64,7 @@
                             </div>
 
                             <div class="col-md-4 rowMarginbt">
-                                <select name="city" class="form-control">
+                                <select name="city" class="form-select">
                                     <option value="">Select City</option>
                                     <option value="Jaffna">Jaffna</option>                                                                        
                                 </select>
@@ -74,7 +74,7 @@
                             </div>
 
                             <div class="col-md-4 rowMarginbt">
-                                <select name="postal" class="form-control">
+                                <select name="postal" class="form-select">
                                     <option value="">Select Postal Code</option>
                                     <option value="Jaffna">Jaffna</option>                                                                        
                                 </select>
@@ -87,7 +87,7 @@
 
                         <div class="row">
                             <div class="col-md-6 rowMarginbt">
-                                <select name="ds" class="form-control">
+                                <select name="ds" class="form-select">
                                     <option value="">Select DS Division</option>
                                     <option value="Jaffna">Jaffna</option>                                                                        
                                 </select>
@@ -97,7 +97,7 @@
                             </div>
 
                             <div class="col-md-6 rowMarginbt">
-                                <select name="gs" class="form-control">
+                                <select name="gs" class="form-select">
                                     <option value="">Select GN Division</option>
                                     <option value="Jaffna">Jaffna</option>                                                                        
                                 </select>
@@ -111,10 +111,8 @@
 
 
                         <div style="margin-top:20px; float: right;">
-                            <button class="btn btn-warning btn-block" type="submit">
-                                <div style="padding:2px 25px;">
-                                    Next
-                                </div>
+                            <button class="theme-btn" type="submit">
+                                Next <i style="margin-left: 5px;" class="fa-solid fa-angle-right"></i>
                             </button>
                         </div>
                     </div>

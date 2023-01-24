@@ -1,26 +1,26 @@
 <body>
     <div class="row">
-        <div class="col-md-4">
-            <div style="font-size: 25px; color:#cfd5de; padding: 50px 50px; font-weight:700;">
+    <div class="col-md-4 d-flex align-items-center justify-content-center" style="background-color:#fff;">
+            <div class="sen-nav-items">
                 <div style="padding:25px;">
                     1. Company Type
-                    <span class="text-success">
+                    <span style="color:#03C988;">
                         <i class="fa-solid fa-check"></i>
                     </span>
                 </div>
                 <div style="padding:25px;">
                     2. Company Details
-                    <span class="text-success">
-                        <i class="fa-solid fa-check"></i>
-                    </span>
-                </div>
-                <div style="padding:25px;">
-                    3. Owners
-                    <span class="text-success">
+                    <span style="color:#03C988;">
                         <i class="fa-solid fa-check"></i>
                     </span>
                 </div>
                 <div style="padding:25px;" class="navActive">
+                    3. Owners
+                    <span style="color:#03C988;">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+                </div>
+                <div style="padding:25px;">
                     4. Shareholder Details
                 </div>
             </div>
@@ -115,13 +115,11 @@
                     </form>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-3"></div>
-                    <div class="col-md-3"></div>
-                    <div class="col-md-3"><a style="width:100%; font-weight:700; margin-top:30px;" href="<?php echo base_url(); ?>home/end" class="btn btn-warning mt-2">Submit</a></div>
-                </div>
+                <div style="margin-top:20px; float: right;">
+                <a href="<?php echo base_url(); ?>home/end" class="theme-btn">Submit</a>
+                        </div>
 
+           
             </div>
         </div>
 

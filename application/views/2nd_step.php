@@ -1,9 +1,7 @@
-
-
 <body>
-    <div class="row">
-        <div class="col-md-4">
-            <div style="font-size: 25px; color:#cfd5de; padding: 50px 50px; font-weight:700;">
+<div class="row">
+<div class="col-md-4 d-flex align-items-center justify-content-center" style="background-color:#fff;">
+            <div class="sen-nav-items">
                 <div style="padding:25px;" class="navActive">
                     1. Company Type
                 </div>
@@ -18,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 d-flex align-items-center justify-content-center">
             <div style="background-color: #F6F8FA; padding:60px 40px;;
   min-height: 100vh;">
                 <div style="margin-bottom: 50px;">
@@ -31,8 +29,9 @@
                     }
 
                     .image-radio {
-                        width: 100%;
-                        height: 100%;
+                        width: 150px;
+                        height: 150px;
+                        text-align: center;
                     }
 
 
@@ -50,7 +49,7 @@
 
                     .radio-toolbar label {
                         display: inline-block;
-                        padding: 50px;
+                        padding: 20px;
                         border-radius: 25px;
                         border: 2px solid;
                         /* The width and style of the border */
@@ -64,50 +63,47 @@
                     }
                 </style>
                 <form action="<?php echo base_url(); ?>home/second_step" method="post">
-                <div>
+                    <div>
 
 
-<div class="row">
+                        <div class="row radio-toolbar ">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-3 d-flex align-items-center justify-content-center mt-1">
+                                <input type="radio" id="radio1" name="company_type" value="Private Limited" checked>
+                                <label for="radio1">
+                                    <img src="<?php echo base_url(); ?>assets/img/hand-shake.png" class="image-radio">
 
-    <div class="radio-toolbar">
-        <div class="col-md-2"></div>
-        <div class="col-md-4">
-            <input type="radio" id="radio1" name="company_type" value="Private Limited" checked>
-            <label for="radio1">
-                <img src="<?php echo base_url(); ?>assets/img/hand-shake.png" class="image-radio">
-            
-            <div class="text-center" style="margin-top: 10px;">
-                Private Limited
-            </div>
-            </label>
-        </div>
+                                    <div class="text-center" style="margin-top: 10px;">
+                                        Private Limited
+                                    </div>
+                                </label>
+                            </div>
 
-        <div class="col-md-4">
-            <input type="radio" id="radio2" name="company_type" value="Gurantee Company">
-            <label for="radio2">
-                <img src="<?php echo base_url(); ?>assets/img/gc.png" class="image-radio">
-                <div class="text-center" style="margin-top: 10px;">
-                Gurantee Company
-            </div>
-            </label>
-        </div>
-        <div class="col-md-2"></div>
-    </div>
+                            <div class="col-md-3 d-flex align-items-center justify-content-center mt-1">
+                                <input type="radio" id="radio2" name="company_type" value="Gurantee Company">
+                                <label for="radio2">
+                                    <img src="<?php echo base_url(); ?>assets/img/gc.png" class="image-radio">
+                                    <div class="text-center" style="margin-top: 10px;">
+                                        Gurantee Company
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
 
-</div>
-
-<div style="margin-top:20px; float: right;">
-                    <button class="btn btn-warning btn-block" type="submit">
-                    <div style="padding:2px 25px;">
-        Next
-    </div>
-                    </button>
-</div>
-</div>
+                        <div style="margin-top:20px; float: right;">
+                            <button class="theme-btn" type="submit">
+                                Next <i style="margin-left: 5px;" class="fa-solid fa-angle-right"></i>
+                            </button>
+                        </div>
+                    </div>
                 </form>
             </div>
 
         </div>
+    </div>
+
+   
 </body>
 
 </html>

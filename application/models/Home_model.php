@@ -54,14 +54,14 @@ class Home_model extends CI_Model
         return $result;
     }
 
-    public function insert_owner($origin,$identity,$fname,$lname,$percentage)
+    public function insert_owner($origin,$identity,$fname,$lname,$percentage,$title)
     {
         $user_id = $this->session->user_id;
 
         $sql = "INSERT INTO owners 
-        (user_id,origin,identity,firstname,lastname,percentage) 
+        (user_id,origin,identity,firstname,lastname,percentage,title) 
         VALUES 
-        ('$user_id','$origin','$identity','$fname','$lname','$percentage')";
+        ('$user_id','$origin','$identity','$fname','$lname','$percentage','$title')";
         $result = $this->db->query($sql);
         return $result;
     }
@@ -236,6 +236,15 @@ class Home_model extends CI_Model
     {
         $sql = "DELETE FROM shareholders WHERE id = $sh";
         $this->db->query($sql);
+    }
+
+    public function owner_data($id)
+    {
+        $sql = "SELECT * FROM owners WHERE id = $id LIMIT 1";
+        $query = $this->db->query($sql);
+        $row = $query->first_row();
+        return $row;
+
     }
                     
 }
