@@ -1,6 +1,26 @@
-<body>
-    <div class="row" style="height: 100vh;">
-        <div class="col-md-4 d-flex align-items-center justify-content-center" style="background-color:#fff;">
+<style>
+    .container-fluid {
+        overflow: hidden;
+    }
+
+    .fullheight {s
+        height: auto;
+        min-height: 100%;
+        height: 100vh;
+    }
+
+    .bgwhite {
+        background-color: #fff;
+    }
+
+    body {
+        background-color: #F6F8FA;
+    }
+</style>
+<div class="container-fluid p-0">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="fullheight bgwhite d-flex align-items-center justify-content-center mx-auto">
             <div class="sen-nav-items">
                 <div style="padding:25px;">
                     1. Company Type
@@ -18,10 +38,11 @@
                     4. Shareholder Details
                 </div>
             </div>
+            </div>
         </div>
+
         <div class="col-md-8">
-            <div style="background-color: #F6F8FA; padding:60px 40px;;
-  min-height: 100vh;">
+        <div style="padding:60px 40px;">
                 <div style="margin-bottom: 50px;">
                     <h1>Company Details
                     </h1>
@@ -36,8 +57,8 @@
                                 margin-bottom: 25px;
                             }
                         </style>
-                        <div class="row rowMarginbt">
-                            <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12 mb-4">
                                 <input type="text" name="company_name" placeholder="Company Name" class="form-control <?php if (form_error('company_name')) {
                                                                                                                             echo "form-error";
                                                                                                                         } ?>" value="<?php echo set_value('company_name'); ?>">
@@ -47,8 +68,8 @@
                             </div>
                         </div>
 
-                        <div class="row rowMarginbt">
-                            <div class="col-md-6 rowMarginbt">
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
                                 <input type="email" placeholder="Email" class="form-control <?php if (form_error('email')) {
                                                                                                 echo "form-error";
                                                                                             } ?>" name="email" value="<?php echo set_value('email'); ?>">
@@ -56,7 +77,7 @@
                                     <?php echo form_error('email'); ?>
                                 </small>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-4">
                                 <input type="text" placeholder="Phone Number" class="form-control <?php if (form_error('phone')) {
                                                                                                         echo "form-error";
                                                                                                     } ?>" name="phone" value="<?php echo set_value('phone'); ?>">
@@ -66,11 +87,9 @@
                             </div>
                         </div>
 
-                        <div class="row rowMarginbt">
-                            <div class="col-md-12">
-                                <textarea name="description" cols="30" rows="6" class="form-control <?php if (form_error('description')) {
-                                                                                                        echo "form-error";
-                                                                                                    } ?>" placeholder="Business activity company will intake" value="<?php echo set_value('description'); ?>"></textarea>
+                        <div class="row">
+                            <div class="col-md-12 mb-4">
+                                <textarea name="description" cols="30" rows="6" class="form-control"  placeholder="Business activity company will intake (Optional)" value="<?php echo set_value('description'); ?>"></textarea>
                                 <small class="form-text">
                                     <?php echo form_error('description'); ?>
                                 </small>
@@ -87,8 +106,6 @@
                     </div>
                 </form>
             </div>
-
         </div>
-</body>
-
-</html>
+    </div>
+</div>

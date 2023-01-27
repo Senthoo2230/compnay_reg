@@ -83,7 +83,17 @@
         .sen-nav-items {
             font-size: 25px;
             color: #cfd5de;
-            font-weight: 400;
+            font-weight: 700;
+        }
+
+        .input-mb{
+                margin-bottom: 0px;
+            }
+        
+        @media only screen and (max-width: 600px) {
+            .input-mb{
+                margin-bottom: 25px;
+            }
         }
     </style>
     <title><?php echo $title; ?></title>

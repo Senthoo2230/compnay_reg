@@ -246,7 +246,79 @@ class Home_model extends CI_Model
         return $row;
 
     }
-                    
+
+    public function get_districts()
+    {
+        $sql = "SELECT * FROM district";
+        $query = $this->db->query($sql);
+        $result = $query->result();
+
+        return $result;
+    }
+
+    public function get_postal()
+    {
+        $sql = "SELECT * FROM postal_code ORDER BY code";
+        $query = $this->db->query($sql);
+        $result = $query->result();
+
+        return $result;
+    }
+
+    public function cities($dis_id)
+    {
+        $sql = "SELECT * FROM cities WHERE district_id = $dis_id";
+        $query = $this->db->query($sql);
+        $result = $query->result();
+
+        return $result;
+    }
+
+    public function ds_divisions($city_id)
+    {
+        $sql = "SELECT * FROM ds_divisions WHERE city_id = $city_id";
+        $query = $this->db->query($sql);
+        $result = $query->result();
+
+        return $result;
+    }
+
+    public function gn_divisions($ds_id)
+    {
+        $sql = "SELECT * FROM gn_divisions WHERE ds_id = $ds_id";
+        $query = $this->db->query($sql);
+        $result = $query->result();
+
+        return $result;
+    }
+
+    public function check_owner($identity){
+        $user_id = $this->session->user_id;
+        $sql = "SELECT *
+        FROM owners
+        WHERE user_id = $user_id AND identity = '$identity'";
+        $query = $this->db->query($sql);
+        $count = $query->num_rows();
+
+        if ($count == 0) {
+            return TRUE;
+        }
+        else{
+            $this->form_validation->set_message('check_owner', 'Owner already is in!');
+            return FALSE;
+        }
+    }
+
+    public function percentage_sum()
+    {
+        $user_id = $this->session->user_id;
+        $sql = "SELECT sum(percentage) as per FROM owners WHERE user_id = $user_id";
+        $query = $this->db->query($sql);
+        $row = $query->row();
+
+        return $row->per;
+    }
+          
 }
 
 

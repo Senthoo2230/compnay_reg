@@ -51,6 +51,13 @@ class Home extends CI_Controller
         $this->load->view('2nd_step');
     }
 
+    public function blank()
+    {
+        $data['title'] = "blank";
+        $this->load->view('head', $data);
+        $this->load->view('blank');
+    }
+
     public function company_details()
     {
         $data['title'] = "#3 Company Details";
@@ -66,8 +73,13 @@ class Home extends CI_Controller
         if (!$this->session->userdata('user_id')) {
             redirect('home');
         }
+
+        $data['districts'] = $this->Home_model->get_districts();
+        $data['postals'] = $this->Home_model->get_postal();
+
         $data['title'] = "#3 Company Address";
         $this->load->view('head', $data);
+
         $this->load->view('4th_step');
     }
 
@@ -111,7 +123,6 @@ class Home extends CI_Controller
                 'max_length' => 'Enter valid phone number',
             )
         );
-        $this->form_validation->set_rules('description', 'Business activity', 'required');
 
         if ($this->form_validation->run() == FALSE) {
             // $this->load->view('head');
@@ -176,13 +187,13 @@ class Home extends CI_Controller
             )
         );
         $this->form_validation->set_rules('title', 'Title', 'required');
-        $this->form_validation->set_rules('identity', 'Identity', 'required');
+        $this->form_validation->set_rules('identity', 'Identity', 'required|callback_check_owner');
         $this->form_validation->set_rules('fname', 'Firstname', 'required');
         $this->form_validation->set_rules('lname', 'Lastname', 'required');
         $this->form_validation->set_rules(
             'percentage',
             'Percentage',
-            'numeric|min_length[1]|max_length[2]',
+            'numeric|min_length[1]|max_length[2]|callback_sum_of_percentage',
             array(
                 'numeric' => 'Percentage must be in numbers',
                 'max_length' => 'Enter valid percentage',
@@ -205,6 +216,27 @@ class Home extends CI_Controller
                 redirect('home/owner');
             }
         }
+    }
+
+    public function check_owner()
+    {
+        $identity = $this->input->post('identity');
+        $is_unique = $this->Home_model->check_owner($identity);
+        return $is_unique;
+    }
+
+    public function sum_of_percentage()
+    {
+        $current_per = $this->input->post('percentage');
+        $sum = $this->Home_model->percentage_sum();
+        if ($sum+$current_per > 100) {
+            $this->form_validation->set_message('sum_of_percentage', 'Total percentage cannot exits more than 100%');
+            return FALSE;
+        }
+        else{
+            return TRUE;
+        }
+        
     }
 
     public function director()
@@ -361,18 +393,55 @@ class Home extends CI_Controller
 
 ?>
         <div class="col-md-3">
-            <input type="text"  name="title" value="<?php echo $owner->title; ?>" class="form-control" >
+            <input type="text" name="title" value="<?php echo $owner->title; ?>" class="form-control">
         </div>
         <div class="col-md-3">
-            <input type="text"  name="fname" value="<?php echo $owner->firstname; ?>" class="form-control" >
+            <input type="text" name="fname" value="<?php echo $owner->firstname; ?>" class="form-control">
         </div>
         <div class="col-md-3">
-            <input type="text"  name="lname" value="<?php echo $owner->lastname; ?>" class="form-control" >
+            <input type="text" name="lname" value="<?php echo $owner->lastname; ?>" class="form-control">
         </div>
         <div class="col-md-3">
             <input type="submit" class="btn btn-success w-100" value="Add Director">
         </div>
-<?php
+        <?php
+    }
+
+    public function get_cities()
+    {
+        $dis_id = $this->input->post('dis_id');
+        $cities = $this->Home_model->cities($dis_id);
+
+        echo "<option value=''>Select City</option>";
+        foreach ($cities as $city) {
+        ?>
+            <option value="<?php echo $city->city_id; ?>"><?php echo $city->city; ?></option>
+        <?php
+        }
+    }
+
+    public function get_ds()
+    {
+        $city_id = $this->input->post('city_id');
+        $ds = $this->Home_model->ds_divisions($city_id);
+        echo "<option value=''>Select DS Division</option>";
+        foreach ($ds as $d) {
+        ?>
+            <option value="<?php echo $d->ds_id; ?>"><?php echo $d->ds; ?></option>
+        <?php
+        }
+    }
+
+    public function get_gn()
+    {
+        $ds_id = $this->input->post('ds_id');
+        $gn = $this->Home_model->gn_divisions($ds_id);
+        echo "<option value=''>Select GN Division</option>";
+        foreach ($gn as $g) {
+        ?>
+            <option value="<?php echo $g->gs_id; ?>"><?php echo $g->gs; ?></option>
+        <?php
+        }
     }
 }
 

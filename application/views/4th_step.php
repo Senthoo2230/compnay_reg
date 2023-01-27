@@ -1,27 +1,48 @@
-<body>
-    <div class="row" style="height: 100vh;">
-    <div class="col-md-4 d-flex align-items-center justify-content-center" style="background-color:#fff;">
-            <div class="sen-nav-items">
-                <div style="padding:25px;">
-                    1. Company Type
-                    <span style="color:#03C988;">
-                        <i class="fa-solid fa-check"></i>
-                    </span>
-                </div>
-                <div style="padding:25px;" class="navActive">
-                    2. Company Details
-                </div>
-                <div style="padding:25px;">
-                    3. Owners
-                </div>
-                <div style="padding:25px;">
-                    4. Shareholder Details
+<style>
+    .container-fluid {
+        overflow: hidden;
+    }
+
+    .fullheight {
+        s height: auto;
+        min-height: 100%;
+        height: 100vh;
+    }
+
+    .bgwhite {
+        background-color: #fff;
+    }
+
+    body {
+        background-color: #F6F8FA;
+    }
+</style>
+<div class="container-fluid p-0">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="fullheight bgwhite d-flex align-items-center justify-content-center mx-auto">
+                <div class="sen-nav-items">
+                    <div style="padding:25px;">
+                        1. Company Type
+                        <span style="color:#03C988;">
+                            <i class="fa-solid fa-check"></i>
+                        </span>
+                    </div>
+                    <div style="padding:25px;" class="navActive">
+                        2. Company Details
+                    </div>
+                    <div style="padding:25px;">
+                        3. Owners
+                    </div>
+                    <div style="padding:25px;">
+                        4. Shareholder Details
+                    </div>
                 </div>
             </div>
         </div>
+
         <div class="col-md-8">
-            <div style="background-color: #F6F8FA; padding:60px 40px;;
-  min-height: 100vh;">
+            <div style="padding:60px 40px;">
                 <div style="margin-bottom: 50px;">
                     <h1>Where is your Company?
                     </h1>
@@ -39,8 +60,8 @@
                         <div class="row">
                             <div class="col-md-6 rowMarginbt">
                                 <input type="text" name="line1" placeholder="Address Line 1" class="form-control <?php if (form_error('line1')) {
-                                                                                                                            echo "form-error";
-                                                                                                                        } ?>" value="<?php echo set_value('line1'); ?>">
+                                                                                                                        echo "form-error";
+                                                                                                                    } ?>" value="<?php echo set_value('line1'); ?>">
                                 <small class="form-text">
                                     <?php echo form_error('line1'); ?>
                                 </small>
@@ -48,64 +69,126 @@
 
                             <div class="col-md-6 rowMarginbt">
                                 <input type="text" name="line2" placeholder="Address Line 1" class="form-control" value="<?php echo set_value('line2'); ?>">
-                                
+
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-4 rowMarginbt">
-                                <select name="district" class="form-select">
+                                <select name="district" class="form-select" id="district">
                                     <option value="">Select District</option>
-                                    <option value="Jaffna">Jaffna</option>                                                                        
+                                    <?php
+                                    foreach ($districts as $dis) {
+                                    ?>
+                                        <option value="<?php echo $dis->district_id ?>"><?php echo $dis->district ?></option>
+                                    <?php
+                                    }
+                                    ?>
                                 </select>
                                 <small class="form-text">
                                     <?php echo form_error('district'); ?>
                                 </small>
                             </div>
+                            <script>
+                                $("#district").change(function() {
+                                    var dis_id = $("#district").val();
+                                    $.ajax({ //create an ajax request to display.php
+                                        type: "POST",
+                                        url: "<?php echo base_url(); ?>home/get_cities",
+                                        data: {
+                                            dis_id: dis_id
+                                        },
+                                        success: function(response) {
+                                            $("#city").html(response);
+                                            //alert(response);
+                                        }
+
+                                    });
+                                });
+                            </script>
 
                             <div class="col-md-4 rowMarginbt">
-                                <select name="city" class="form-select">
+                                <select name="city" class="form-select" id="city">
                                     <option value="">Select City</option>
-                                    <option value="Jaffna">Jaffna</option>                                                                        
                                 </select>
                                 <small class="form-text">
                                     <?php echo form_error('city'); ?>
                                 </small>
                             </div>
 
+                            <script>
+                                $("#city").change(function() {
+                                    var city_id = $("#city").val();
+                                    $.ajax({ //create an ajax request to display.php
+                                        type: "POST",
+                                        url: "<?php echo base_url(); ?>home/get_ds",
+                                        data: {
+                                            city_id: city_id
+                                        },
+                                        success: function(response) {
+                                            $("#ds").html(response);
+                                            //alert(response);
+                                        }
+
+                                    });
+                                });
+                            </script>
+
                             <div class="col-md-4 rowMarginbt">
                                 <select name="postal" class="form-select">
                                     <option value="">Select Postal Code</option>
-                                    <option value="Jaffna">Jaffna</option>                                                                        
+                                    <?php
+                                    foreach ($postals as $postal) {
+                                    ?>
+                                        <option value="<?php echo $postal->postal_id ?>"><?php echo $postal->code ?></option>
+                                    <?php
+                                    }
+                                    ?>
                                 </select>
                                 <small class="form-text">
                                     <?php echo form_error('district'); ?>
                                 </small>
                             </div>
-                            
+
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 rowMarginbt">
-                                <select name="ds" class="form-select">
+                                <select name="ds" class="form-select" id="ds">
                                     <option value="">Select DS Division</option>
-                                    <option value="Jaffna">Jaffna</option>                                                                        
                                 </select>
                                 <small class="form-text">
                                     <?php echo form_error('ds'); ?>
                                 </small>
                             </div>
 
+                            <script>
+                                $("#ds").change(function() {
+                                    var ds_id = $("#ds").val();
+                                    $.ajax({ //create an ajax request to display.php
+                                        type: "POST",
+                                        url: "<?php echo base_url(); ?>home/get_gn",
+                                        data: {
+                                            ds_id: ds_id
+                                        },
+                                        success: function(response) {
+                                            $("#gn").html(response);
+                                            //alert(response);
+                                        }
+
+                                    });
+                                });
+                            </script>
+
                             <div class="col-md-6 rowMarginbt">
-                                <select name="gs" class="form-select">
+                                <select name="gs" class="form-select" id="gn">
                                     <option value="">Select GN Division</option>
-                                    <option value="Jaffna">Jaffna</option>                                                                        
                                 </select>
                                 <small class="form-text">
                                     <?php echo form_error('gs'); ?>
                                 </small>
                             </div>
-                            
+
                         </div>
 
 
@@ -118,8 +201,6 @@
                     </div>
                 </form>
             </div>
-
         </div>
-</body>
-
-</html>
+    </div>
+</div>
