@@ -29,12 +29,11 @@
             <div style="background-color: #F6F8FA; padding:60px 40px;;
   min-height: 100vh;">
                 <div style="margin-bottom: 50px;">
-                    <h1>Who is your shareholder
+                    <h1>Who is your Shareholders
                     </h1>
                 </div>
                 <div style="font-size: 24px;">
                     Shareholder details
-
                 </div>
                 <hr>
 

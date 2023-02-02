@@ -259,6 +259,7 @@ class Home extends CI_Controller
         $this->form_validation->set_rules('title', 'Title', 'required');
         $this->form_validation->set_rules('fname', 'Firstname', 'required');
         $this->form_validation->set_rules('lname', 'Lastname', 'required');
+        $this->form_validation->set_rules('check_dir', 'Director', 'required|callback_check_dir');
 
         if ($this->form_validation->run() == FALSE) {
             $this->director();
@@ -272,6 +273,21 @@ class Home extends CI_Controller
             } else {
                 $this->director();
             }
+        }
+    }
+
+    public function check_dir()
+    {
+        $title = $this->input->post('title');
+        $fname = $this->input->post('fname');
+        $lname = $this->input->post('lname');
+        $dir = $this->Home_model->check_director($title,$fname,$lname);
+        if ($dir == 0) {
+            return TRUE;
+        }
+        else{
+            $this->form_validation->set_message('check_dir', 'Director already is in!');
+            return FALSE;
         }
     }
 
@@ -326,6 +342,7 @@ class Home extends CI_Controller
         }
         $data['title'] = "#3 Secretary";
         $data['sec_count'] = $this->Home_model->sec_count();
+        $data['owners'] = $this->Home_model->get_owners();
         $data['secretary'] = $this->Home_model->get_secretary();
 
         $this->Home_model->save_directors();
@@ -402,7 +419,20 @@ class Home extends CI_Controller
             <input type="text" name="lname" value="<?php echo $owner->lastname; ?>" class="form-control">
         </div>
         <div class="col-md-3">
-            <input type="submit" class="btn btn-success w-100" value="Add Director">
+            <?php
+            $sec = $owner_id = $this->input->post('sec');
+            if ($sec == 1) {
+                ?>
+                    <input type="submit" class="btn btn-success w-100" value="Add Secretary">
+                <?php
+            }
+            else{
+                ?>
+                <input type="submit" class="btn btn-success w-100" value="Add Director">
+                <?php
+            }
+            ?>
+            
         </div>
         <?php
     }

@@ -309,6 +309,17 @@ class Home_model extends CI_Model
         }
     }
 
+    public function check_director($title,$fname,$lname)
+    {
+        $user_id = $this->session->user_id;
+        $sql = "SELECT *
+        FROM directors
+        WHERE user_id = $user_id AND title = '$title' AND firstname = '$fname' AND lastname = '$lname'";
+        $query = $this->db->query($sql);
+        $count = $query->num_rows();
+        return $count;
+    }
+
     public function percentage_sum()
     {
         $user_id = $this->session->user_id;
