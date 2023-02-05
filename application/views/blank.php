@@ -4,7 +4,7 @@
     }
 
     .fullheight {
-        s height: auto;
+        height: auto;
         min-height: 100%;
         height: 100vh;
     }

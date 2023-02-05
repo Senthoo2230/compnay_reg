@@ -259,7 +259,7 @@ class Home extends CI_Controller
         $this->form_validation->set_rules('title', 'Title', 'required');
         $this->form_validation->set_rules('fname', 'Firstname', 'required');
         $this->form_validation->set_rules('lname', 'Lastname', 'required');
-        $this->form_validation->set_rules('check_dir', 'Director', 'required|callback_check_dir');
+        $this->form_validation->set_rules('check_dir', 'Director', 'callback_check_dir');
 
         if ($this->form_validation->run() == FALSE) {
             $this->director();
