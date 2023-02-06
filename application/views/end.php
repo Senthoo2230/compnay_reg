@@ -7,7 +7,7 @@
                 </div>
 
                 <div style="font-size:34px; margin-top:50px;">
-                    Thank you fro registering will get back to you
+                    Thank you for registering will get back to you
                 </div>
 
                 <div style="margin-top:20px;">

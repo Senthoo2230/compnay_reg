@@ -90,14 +90,14 @@ class Home_model extends CI_Model
         return $result;
     }
 
-    public function insert_sh($address,$email,$city,$state,$postal)
+    public function insert_sh($title,$fullname,$address,$email,$city,$state,$postal)
     {
         $user_id = $this->session->user_id;
 
         $sql = "INSERT INTO shareholders 
-        (user_id,address,email,city,state,postal) 
+        (title,fullname,user_id,address,email,city,state,postal) 
         VALUES 
-        ('$user_id','$address','$email','$city','$state','$postal')";
+        ('$title','$fullname','$user_id','$address','$email','$city','$state','$postal')";
         $result = $this->db->query($sql);
         return $result;
     }
@@ -329,6 +329,36 @@ class Home_model extends CI_Model
 
         return $row->per;
     }
+
+    public function company_data()
+    {
+        $user_id = $this->session->user_id;
+        $sql = "SELECT * FROM company_details WHERE user_id = $user_id";
+        $query = $this->db->query($sql);
+        $row = $query->row();
+
+        return $row;
+    }
+
+    public function address_data()
+    {
+        $user_id = $this->session->user_id;
+        $sql = "SELECT * FROM company_address WHERE user_id = $user_id";
+        $query = $this->db->query($sql);
+        $row = $query->row();
+
+        return $row;
+    }
+    
+    public function confirm_user(){
+        $user_id = $this->session->user_id;
+        $sql = "UPDATE users
+        SET confirm = 1
+        WHERE id = $user_id";
+        $this->db->query($sql);
+    }
+
+    
           
 }
 

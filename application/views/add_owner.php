@@ -56,17 +56,9 @@
 
                 <div>
                     <?php 
-                    if ($this->session->flashdata('error')) {
-                        echo $this->session->flashdata('error');
-                    }
-                    // if ($owner_count > 0) {
-                    //     $owner_err = "";
-                    //     //echo "director";
-                    // } else {
-                    //     $owner_err = "<div class='alert alert-danger'>Please Add a Owner</div>";
-                    //     //echo "owner";
-                    // }
-                    // echo $owner_err;
+                        if ($this->session->flashdata('error')) {
+                            echo $this->session->flashdata('error');
+                        }
                     ?>
                 </div>
                 

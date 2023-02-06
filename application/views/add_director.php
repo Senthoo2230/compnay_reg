@@ -57,14 +57,10 @@
                 <hr>
 
                 <div>
-                    <?php if ($dir_count > 0) {
-                        $dir_err = "";
-                        //echo "director";
-                    } else {
-                        $dir_err = "<div class='alert alert-danger'>Please Add a Director</div>";
-                        //echo "owner";
-                    }
-                    echo $dir_err;
+                    <?php 
+                        if ($this->session->flashdata('error')) {
+                            echo $this->session->flashdata('error');
+                        }
                     ?>
                 </div>
 
@@ -199,6 +195,7 @@
                                                                 echo "secretary";
                                                             } else {
                                                                 //$owner_err = "<div class='alert alert-danger'>Please Add a Owner</div>";
+                                                                $this->session->set_flashdata('error', "<div class='alert alert-danger'>Please Add a Director</div>");
                                                                 echo "director";
                                                             } ?>" class="theme-btn">Next <i style="margin-left: 5px;" class="fa-solid fa-angle-right"></i></a>
                 </div>

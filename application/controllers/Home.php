@@ -18,8 +18,16 @@ class Home extends CI_Controller
     public function getStart()
     {
 
-        $this->form_validation->set_rules('email', 'Email', 'required');
-        $this->form_validation->set_rules('mobile', 'Mobile Number', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]',
+            array('is_unique' => 'Email ID is already registered!')
+        );
+        $this->form_validation->set_rules('mobile', 'Mobile Number', 'required|numeric|min_length[9]|max_length[10]',
+            array(
+                'min_length' => 'Enter a valid Mobile number!',
+                'max_length' => 'Enter a valid Mobile number!',
+                'numeric' => 'Enter a valid Mobile number!'
+            )
+        );
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('home');
@@ -248,6 +256,7 @@ class Home extends CI_Controller
         $data['directors'] = $this->Home_model->get_directors();
         $data['owners'] = $this->Home_model->get_owners();
         $data['dir_count'] = $this->Home_model->dir_count();
+
         $this->Home_model->save_owners();
 
         $this->load->view('head', $data);
@@ -314,6 +323,8 @@ class Home extends CI_Controller
 
     public function add_sh()
     {
+        $this->form_validation->set_rules('title', 'Title', 'required');
+        $this->form_validation->set_rules('fullname', 'Fullname', 'required');
         $this->form_validation->set_rules('address', 'Address', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('city', 'City', 'required');
@@ -321,13 +332,15 @@ class Home extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->shareholders();
         } else {
+            $title = $this->input->post('title');
+            $fullname = $this->input->post('fullname');
             $address = $this->input->post('address');
             $email = $this->input->post('email');
             $city = $this->input->post('city');
             $state = $this->input->post('state');
             $postal = $this->input->post('postal');
 
-            if ($this->Home_model->insert_sh($address, $email, $city, $state, $postal)) {
+            if ($this->Home_model->insert_sh($title, $fullname, $address, $email, $city, $state, $postal)) {
                 redirect('home/shareholders');
             } else {
                 redirect('home/shareholders');
@@ -372,7 +385,7 @@ class Home extends CI_Controller
         }
 
         $data['title'] = "End";
-        //$this->Home_model->save_sh();
+        $this->Home_model->confirm_user();
         $this->load->view('head', $data);
         $this->load->view('end');
 
@@ -472,6 +485,23 @@ class Home extends CI_Controller
             <option value="<?php echo $g->gs_id; ?>"><?php echo $g->gs; ?></option>
         <?php
         }
+    }
+
+    public function confirm()
+    {
+        if (!$this->session->userdata('user_id')) {
+            redirect('home');
+        }
+            $data['company_data'] = $this->Home_model->company_data();
+            $data['address_data'] = $this->Home_model->address_data();
+            $data['owners'] = $this->Home_model->get_owners();
+            $data['directors'] = $this->Home_model->get_directors();
+            $data['secretary'] = $this->Home_model->get_secretary();
+            $data['shs'] = $this->Home_model->get_sh();
+            $data['title'] = "Confirm";
+        //$this->Home_model->save_sh();
+        $this->load->view('head', $data);
+        $this->load->view('confirm');
     }
 }
 

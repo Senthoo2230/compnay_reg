@@ -56,17 +56,11 @@
                 </div>
                 <hr>
 
-                <div>
-                    <?php if ($sec_count > 0) {
-                        $sec_err = "";
-                        //echo "director";
-                    } else {
-                        $sec_err = "<div class='alert alert-danger'>Please Add a Secretary</div>";
-                        //echo "owner";
-                    }
-                    echo $sec_err;
+                    <?php 
+                        if ($this->session->flashdata('error')) {
+                            echo $this->session->flashdata('error');
+                        }
                     ?>
-                </div>
 
 
                 <div>
@@ -185,6 +179,7 @@
                                                                 echo "shareholders";
                                                             } else {
                                                                 //$owner_err = "<div class='alert alert-danger'>Please Add a Owner</div>";
+                                                                $this->session->set_flashdata('error', "<div class='alert alert-danger'>Please Add a Secretary</div>");
                                                                 echo "secretary";
                                                             } ?>" class="theme-btn">Next <i style="margin-left: 5px;" class="fa-solid fa-angle-right"></i></a>
                 </div>
