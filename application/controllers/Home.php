@@ -18,7 +18,7 @@ class Home extends CI_Controller
     public function getStart()
     {
 
-        $this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]',
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]',
             array('is_unique' => 'Email ID is already registered!')
         );
         $this->form_validation->set_rules('mobile', 'Mobile Number', 'required|numeric|min_length[9]|max_length[10]',
@@ -55,8 +55,11 @@ class Home extends CI_Controller
         if (!$this->session->userdata('user_id')) {
             redirect('home');
         }
+        $data['type_is'] = $this->Home_model->is_company_type();
+        $data['type_data'] = $this->Home_model->company_type_data();
+
         $this->load->view('head', $data);
-        $this->load->view('2nd_step');
+        $this->load->view('2nd_step',$data);
     }
 
     public function blank()
@@ -69,11 +72,16 @@ class Home extends CI_Controller
     public function company_details()
     {
         $data['title'] = "#3 Company Details";
+        
         if (!$this->session->userdata('user_id')) {
             redirect('home');
         }
+
+        $data['detail_is'] = $this->Home_model->detail_is();
+        $data['detail_data'] = $this->Home_model->company_detail_data();
+
         $this->load->view('head', $data);
-        $this->load->view('3rd_step');
+        $this->load->view('3rd_step',$data);
     }
 
     public function company_address()
@@ -82,6 +90,8 @@ class Home extends CI_Controller
             redirect('home');
         }
 
+        $data['address_is'] = $this->Home_model->address_is();
+        $data['address_data'] = $this->Home_model->company_address_data();
         $data['districts'] = $this->Home_model->get_districts();
         $data['postals'] = $this->Home_model->get_postal();
 
@@ -104,11 +114,11 @@ class Home extends CI_Controller
         $this->load->view('add_owner', $data);
     }
 
-    public function second_step()
+    public function second_step($action)
     {
         $type = $this->input->post('company_type');
 
-        if ($this->Home_model->insert_type($type)) {
+        if ($this->Home_model->insert_type($type,$action)) {
             // Third Step
             redirect('home/company_details');
         } else {
@@ -118,10 +128,10 @@ class Home extends CI_Controller
     }
 
     //Company Details
-    public function third_step()
+    public function third_step($action)
     {
         $this->form_validation->set_rules('company_name', 'Company Name', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules(
             'phone',
             'Phone',
@@ -142,7 +152,7 @@ class Home extends CI_Controller
             $phone = $this->input->post('phone');
             $description = $this->input->post('description');
 
-            if ($this->Home_model->insert_company_details($name, $email, $phone, $description)) {
+            if ($this->Home_model->insert_company_details($name, $email, $phone, $description,$action)) {
                 // 4th Step
                 redirect('home/company_address');
             } else {
@@ -153,7 +163,7 @@ class Home extends CI_Controller
     }
 
     // Company Address
-    public function fourth_step()
+    public function fourth_step($action)
     {
         $this->form_validation->set_rules('line1', 'Address Line 1', 'required');
         $this->form_validation->set_rules('district', 'District', 'required');
@@ -174,7 +184,7 @@ class Home extends CI_Controller
             $gs = $this->input->post('gs');
 
 
-            if ($this->Home_model->insert_company_address($line1, $line2, $district, $city, $postal, $ds, $gs)) {
+            if ($this->Home_model->insert_company_address($line1, $line2, $district, $city, $postal, $ds, $gs, $action)) {
                 // 5th Step
                 redirect('home/owner');
             } else {
@@ -436,12 +446,12 @@ class Home extends CI_Controller
             $sec = $owner_id = $this->input->post('sec');
             if ($sec == 1) {
                 ?>
-                    <input type="submit" class="btn btn-success w-100" value="Add Secretary">
+                    <input type="submit" class="btn btn-primary w-100" value="Add Secretary">
                 <?php
             }
             else{
                 ?>
-                <input type="submit" class="btn btn-success w-100" value="Add Director">
+                <input type="submit" class="btn btn-primary w-100" value="Add Director">
                 <?php
             }
             ?>
@@ -502,6 +512,12 @@ class Home extends CI_Controller
         //$this->Home_model->save_sh();
         $this->load->view('head', $data);
         $this->load->view('confirm');
+    }
+
+    public function out()
+    {
+        $this->session->sess_destroy();
+        redirect('home');
     }
 }
 

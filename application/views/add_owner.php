@@ -119,7 +119,7 @@
                             </div>
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
-                            <input type="submit" class="btn btn-success" value="Add Owner">
+                            <input type="submit" class="btn btn-primary" value="Add Owner">
                             </div>
                         </div>
                     </form>
@@ -153,7 +153,7 @@
                                     <td><?php echo $owner->percentage; ?>%</td>
                                     <td>
                                         <a href="<?php echo base_url(); ?>home/delete_owner/<?php echo $owner->id; ?>">
-                                            <div class="btn btn-danger btn-sm">Delete</div>
+                                            <div class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></div>
                                         </a>
                                     </td>
                                 </tr>

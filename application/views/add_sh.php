@@ -91,7 +91,7 @@
                             </div>
 
                             <div class="col-md-3">
-                                <input type="submit" class="btn btn-success" value="Add Shareholder" style="width:100%">
+                                <input type="submit" class="btn btn-primary" value="Add Shareholder" style="width:100%">
                             </div>
                         </div>
                     </form>
@@ -108,7 +108,7 @@
                                 <th>City</th>
                                 <th>State/Region</th>
                                 <th>Postal</th>
-                                <th>Action</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
 
@@ -124,9 +124,9 @@
                                     <td><?php echo $sh->city; ?></td>
                                     <td><?php echo $sh->state; ?></td>
                                     <td><?php echo $sh->postal; ?></td>
-                                    <td>
+                                    <td class="text-center">
                                         <a href="<?php echo base_url(); ?>home/delete_sh/<?php echo $sh->id; ?>">
-                                            <div class="btn btn-danger btn-sm">Delete</div>
+                                            <div class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></div>
                                         </a>
                                     </td>
                                 </tr>

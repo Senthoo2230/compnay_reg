@@ -134,7 +134,7 @@
                             </div>
 
                             <div class="col-md-3">
-                                <input type="submit" class="btn btn-success" value="Add Secretary ">
+                                <input type="submit" class="btn btn-primary" value="Add Secretary ">
                             </div>
                         </div>
                     </form>
@@ -147,7 +147,7 @@
                                 <th>Title</th>
                                 <th>Firstname</th>
                                 <th>Lastname</th>
-                                <th>Action</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
 
@@ -159,9 +159,9 @@
                                     <td><?php echo $sec->title; ?></td>
                                     <td><?php echo $sec->firstname; ?></td>
                                     <td><?php echo $sec->lastname; ?></td>
-                                    <td>
+                                    <td class="text-center">
                                         <a href="<?php echo base_url(); ?>home/delete_secretary/<?php echo $sec->id; ?>">
-                                            <div class="btn btn-danger btn-sm">Delete</div>
+                                            <div class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></div>
                                         </a>
                                     </td>
                                 </tr>

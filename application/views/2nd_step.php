@@ -98,9 +98,18 @@
 
                         }
                     </style>
-                    <form action="<?php echo base_url(); ?>home/second_step" method="post">
+                    <?php
+                        //Data is available
+                        if($type_is == 1){
+                            $action = "update";
+                        }
+                        //Data is not there
+                        if($type_is == 0){
+                            $action = "insert";
+                        }
+                    ?>
+                    <form action="<?php echo base_url(); ?>home/second_step/<?php echo $action; ?>" method="post">
                         <div>
-
 
                             <div class="row radio-toolbar d-flex justify-content-center">
                                 <div class="test-box text-center">

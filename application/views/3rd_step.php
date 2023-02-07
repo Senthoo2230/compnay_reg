@@ -41,6 +41,17 @@
             </div>
         </div>
 
+                    <?php
+                        //Data is available
+                        if($detail_is == 1){
+                            $action = "update";
+                        }
+                        //Data is not there
+                        if($detail_is == 0){
+                            $action = "insert";
+                        }
+                    ?>
+
         <div class="col-md-8">
         <div style="padding:60px 40px;">
                 <div style="margin-bottom: 50px;">
@@ -49,7 +60,7 @@
                 </div>
                 <hr>
 
-                <form action="<?php echo base_url(); ?>home/third_step" method="post">
+                <form action="<?php echo base_url(); ?>home/third_step/<?php echo $action; ?>" method="post">
                     <div style="font-family: 'Quicksand', sans-serif;">
 
                         <style>
@@ -58,10 +69,26 @@
                             }
                         </style>
                         <div class="row">
+
+                            <?php
+                                // Input Values
+                                if($detail_is == 1){
+                                    $name_val = $detail_data->name;
+                                    $email_val = $detail_data->email;
+                                    $phone_val = $detail_data->phone;
+                                    $des_val = $detail_data->description;
+                                }
+                                if($detail_is == 0){
+                                    $name_val = set_value('email');
+                                    $email_val = set_value('email');
+                                    $phone_val = set_value('phone');
+                                    $des_val = set_value('description');
+                                }
+
+                            ?>
+                        
                             <div class="col-md-12 mb-4">
-                                <input type="text" name="company_name" placeholder="Company Name" class="form-control <?php if (form_error('company_name')) {
-                                                                                                                            echo "form-error";
-                                                                                                                        } ?>" value="<?php echo set_value('company_name'); ?>">
+                                <input type="text" name="company_name" placeholder="Company Name" class="form-control <?php if (form_error('company_name')) {echo "form-error";} ?>" value="<?php echo $name_val; ?>">
                                 <small class="form-text">
                                     <?php echo form_error('company_name'); ?>
                                 </small>
@@ -72,7 +99,7 @@
                             <div class="col-md-6 mb-4">
                                 <input type="email" placeholder="Email" class="form-control <?php if (form_error('email')) {
                                                                                                 echo "form-error";
-                                                                                            } ?>" name="email" value="<?php echo set_value('email'); ?>">
+                                                                                            } ?>" name="email" value="<?php echo $email_val; ?>">
                                 <small class="form-text">
                                     <?php echo form_error('email'); ?>
                                 </small>
@@ -80,7 +107,7 @@
                             <div class="col-md-6 mb-4">
                                 <input type="text" placeholder="Phone Number" class="form-control <?php if (form_error('phone')) {
                                                                                                         echo "form-error";
-                                                                                                    } ?>" name="phone" value="<?php echo set_value('phone'); ?>">
+                                                                                                    } ?>" name="phone" value="<?php echo $phone_val; ?>">
                                 <small class="form-text">
                                     <?php echo form_error('phone'); ?>
                                 </small>
@@ -89,7 +116,7 @@
 
                         <div class="row">
                             <div class="col-md-12 mb-4">
-                                <textarea name="description" cols="30" rows="6" class="form-control"  placeholder="Business activity company will intake (Optional)" value="<?php echo set_value('description'); ?>"></textarea>
+                                <textarea name="description" cols="30" rows="6" class="form-control"  placeholder="Business activity company will intake (Optional)" ><?php echo $des_val; ?></textarea>
                                 <small class="form-text">
                                     <?php echo form_error('description'); ?>
                                 </small>

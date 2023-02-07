@@ -29,10 +29,14 @@
                                 <th class="text-left" scope="row">Company Address :</th>
                                 <td class="text-right"><?php echo $address_data->line1 . "  " . $address_data->line2; ?></td>
                             </tr>
-
+                            <?php
+                            $CI =& get_instance();
+                            $CI->load->model('Home_model');
+                            
+                            ?>
                             <tr>
                                 <th class="text-left" scope="row">District :</th>
-                                <td class="text-right"><?php echo $address_data->district; ?></td>
+                                <td class="text-right"><?php echo $CI->Home_model->district_name($address_data->district);; ?></td>
                             </tr>
 
                         </tbody>

@@ -17,6 +17,7 @@
         background-color: #F6F8FA;
     }
 </style>
+
 <div class="container-fluid p-0">
     <div class="row">
         <div class="col-md-4">
@@ -49,7 +50,41 @@
                 </div>
                 <hr>
 
-                <form action="<?php echo base_url(); ?>home/fourth_step" method="post">
+                <?php
+                    $CI =& get_instance();
+                    $CI->load->model('Home_model');
+                    
+                    // Input Values
+                    if($address_is == 1){
+                        $action = "update";
+                        $line1_val = $address_data->line1;
+                        $line2_val = $address_data->line2;
+
+                        $city_id = $address_data->city;
+                        $city_name = $CI->Home_model->city_name($city_id);
+                        $city_val = "<option value='$city_id' selected>$city_name</option>";
+
+                        $ds_id = $address_data->ds;
+                        $ds_name = $CI->Home_model->ds_name($ds_id);
+                        $ds_val = "<option value='$ds_id' selected>$ds_name</option>";
+
+                        $gn_id = $address_data->gs;
+                        $gn_name = $CI->Home_model->gn_name($gn_id);
+                        $gn_val = "<option value='$gn_id' selected>$gn_name</option>";
+
+
+                        // $des_val = $detail_data->description;
+                    }
+                    if($address_is == 0){
+                        $action = "insert";
+                        $line1_val = set_value('line1');
+                        $line2_val = set_value('line2');
+                        $city_val = "";
+                    }
+
+                ?>
+
+                <form action="<?php echo base_url(); ?>home/fourth_step/<?php echo $action; ?>" method="post">
                     <div id="address-form">
 
                         <style>
@@ -61,14 +96,14 @@
                             <div class="col-md-6 rowMarginbt">
                                 <input type="text" name="line1" placeholder="Address Line 1" class="form-control <?php if (form_error('line1')) {
                                                                                                                         echo "form-error";
-                                                                                                                    } ?>" value="<?php echo set_value('line1'); ?>">
+                                                                                                                    } ?>" value="<?php echo $line1_val; ?>">
                                 <small class="form-text">
                                     <?php echo form_error('line1'); ?>
                                 </small>
                             </div>
 
                             <div class="col-md-6 rowMarginbt">
-                                <input type="text" name="line2" placeholder="Address Line 1" class="form-control" value="<?php echo set_value('line2'); ?>">
+                                <input type="text" name="line2" placeholder="Address Line 2" class="form-control" value="<?php echo $line2_val; ?>">
 
                             </div>
                         </div>
@@ -79,8 +114,19 @@
                                     <option value="">Select District</option>
                                     <?php
                                     foreach ($districts as $dis) {
+                                        if($address_is == 1){
+                                            if($address_data->district == $dis->district_id){
+                                                $attr = "selected";
+                                            }
+                                            else{
+                                                $attr = "";
+                                            }
+                                        }
+                                        else{
+                                            $attr = "";
+                                        }
                                     ?>
-                                        <option value="<?php echo $dis->district_id ?>"><?php echo $dis->district ?></option>
+                                    <option <?php echo $attr; ?> value="<?php echo $dis->district_id ?>"><?php echo $dis->district ?></option>
                                     <?php
                                     }
                                     ?>
@@ -100,6 +146,8 @@
                                         },
                                         success: function(response) {
                                             $("#city").html(response);
+                                            $("#ds").html("<option val=''>Select DS Division</option>");
+                                            $("#gn").html("<option val=''>Select GN Division</option>");
                                             //alert(response);
                                         }
 
@@ -110,6 +158,9 @@
                             <div class="col-md-4 rowMarginbt">
                                 <select name="city" class="form-select" id="city">
                                     <option value="">Select City</option>
+                                    <?php
+                                    echo $city_val;
+                                    ?>
                                 </select>
                                 <small class="form-text">
                                     <?php echo form_error('city'); ?>
@@ -139,11 +190,24 @@
                                     <option value="">Select Postal Code</option>
                                     <?php
                                     foreach ($postals as $postal) {
+                                        if($address_is == 1){
+                                            if($address_data->postal == $postal->postal_id){
+                                                $attr_p = "selected";
+                                            }
+                                            else{
+                                                $attr_p = "";
+                                            }
+                                        }
+                                        else{
+                                            $attr_p = "";
+                                        }
                                     ?>
-                                        <option value="<?php echo $postal->postal_id ?>"><?php echo $postal->code ?></option>
+                                    <option <?php echo $attr_p; ?> value="<?php echo $postal->postal_id; ?>"><?php echo $postal->code; ?></option>
                                     <?php
                                     }
                                     ?>
+                                    
+                                    
                                 </select>
                                 <small class="form-text">
                                     <?php echo form_error('district'); ?>
@@ -156,6 +220,9 @@
                             <div class="col-md-6 rowMarginbt">
                                 <select name="ds" class="form-select" id="ds">
                                     <option value="">Select DS Division</option>
+                                    <?php
+                                    echo $ds_val;
+                                    ?>
                                 </select>
                                 <small class="form-text">
                                     <?php echo form_error('ds'); ?>
@@ -183,6 +250,9 @@
                             <div class="col-md-6 rowMarginbt">
                                 <select name="gs" class="form-select" id="gn">
                                     <option value="">Select GN Division</option>
+                                    <?php
+                                    echo $gn_val;
+                                    ?>
                                 </select>
                                 <small class="form-text">
                                     <?php echo form_error('gs'); ?>

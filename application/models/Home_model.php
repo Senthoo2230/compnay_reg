@@ -18,29 +18,68 @@ class Home_model extends CI_Model
         return $row->id;
     }
 
-    public function insert_type($type)
+    public function insert_type($type,$action)
     {
         $user_id = $this->session->user_id;
-
-        $sql = "INSERT INTO user_company_type (user_id, type) VALUES ('$user_id','$type')";
+        //Data is available
+        if($action == "update"){
+            $sql = "UPDATE user_company_type
+            SET type = '$type'
+            WHERE user_id = $user_id";
+        }
+        //Data is not there
+        if($action == "insert"){
+            $sql = "INSERT INTO user_company_type (user_id, type) VALUES ('$user_id','$type')";
+        }
+        
         $result = $this->db->query($sql);
         return $result;
     }
 
-    public function insert_company_details($name,$email,$phone,$des)
+    public function insert_company_details($name,$email,$phone,$des,$action)
     {
         $user_id = $this->session->user_id;
 
-        $sql = "INSERT INTO company_details (user_id, name, email, phone, description) VALUES ('$user_id','$name','$email','$phone','$des')";
+        //Data is available
+        if($action == "update"){
+            $sql = "UPDATE company_details
+            SET name = '$name',
+            email = '$email',
+            phone = '$phone',
+            description = '$des'
+            WHERE user_id = $user_id";
+        }
+        //Data is not there
+        if($action == "insert"){
+            $sql = "INSERT INTO company_details (user_id, name, email, phone, description) VALUES ('$user_id','$name','$email','$phone','$des')";
+        }
+
         $result = $this->db->query($sql);
         return $result;
     }
 
-    public function insert_company_address($line1,$line2,$district,$city,$postal,$ds,$gs)
+    public function insert_company_address($line1,$line2,$district,$city,$postal,$ds,$gs,$action)
     {
         $user_id = $this->session->user_id;
 
-        $sql = "INSERT INTO company_address (user_id, line1, line2, district, city, postal, ds , gs) VALUES ('$user_id', '$line1', '$line2', '$district', '$city', '$postal','$ds','$gs')";
+        //Data is available
+        if($action == "update"){
+            $sql = "UPDATE company_address
+            SET line1 = '$line1',
+            line2 = '$line2',
+            district = '$district',
+            city = '$city',
+            postal = '$postal',
+            ds = '$ds',
+            gs = '$gs'
+            WHERE user_id = $user_id";
+        }
+        //Data is not there
+        if($action == "insert"){
+            $sql = "INSERT INTO company_address (user_id, line1, line2, district, city, postal, ds , gs) VALUES ('$user_id', '$line1', '$line2', '$district', '$city', '$postal','$ds','$gs')";
+        }
+
+        
         $result = $this->db->query($sql);
         return $result;
     }
@@ -358,8 +397,120 @@ class Home_model extends CI_Model
         $this->db->query($sql);
     }
 
-    
-          
+    public function is_company_type(){
+        $user_id = $this->session->user_id;
+        $sql = "SELECT id
+        FROM user_company_type
+        WHERE user_id = $user_id";
+        $query = $this->db->query($sql);
+        $count = $query->num_rows();
+
+        if($count > 0){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public function company_type_data(){
+        $user_id = $this->session->user_id;
+        $sql = "SELECT *
+        FROM user_company_type
+        WHERE user_id = $user_id";
+        $query = $this->db->query($sql);
+        $row = $query->row();
+        return $row;
+    }
+
+    public function detail_is(){
+        $user_id = $this->session->user_id;
+        $sql = "SELECT id
+        FROM company_details
+        WHERE user_id = $user_id";
+        $query = $this->db->query($sql);
+        $count = $query->num_rows();
+
+        if($count > 0){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public function address_is(){
+        $user_id = $this->session->user_id;
+        $sql = "SELECT id
+        FROM company_address
+        WHERE user_id = $user_id";
+        $query = $this->db->query($sql);
+        $count = $query->num_rows();
+
+        if($count > 0){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public function company_address_data(){
+        $user_id = $this->session->user_id;
+        $sql = "SELECT *
+        FROM company_address
+        WHERE user_id = $user_id";
+        $query = $this->db->query($sql);
+        $row = $query->row();
+        return $row;
+    }
+
+    public function company_detail_data(){
+        $user_id = $this->session->user_id;
+        $sql = "SELECT *
+        FROM company_details
+        WHERE user_id = $user_id";
+        $query = $this->db->query($sql);
+        $row = $query->row();
+        return $row;
+    }
+
+    public function city_name($id){
+        $sql = "SELECT *
+        FROM cities
+        WHERE city_id = $id";
+        $query = $this->db->query($sql);
+        $row = $query->row();
+        return $row->city;
+    }
+
+    public function district_name($id){
+        $sql = "SELECT *
+        FROM district
+        WHERE district_id = $id";
+        $query = $this->db->query($sql);
+        $row = $query->row();
+        return $row->district;
+    }
+
+    public function ds_name($ds_id){
+        $sql = "SELECT *
+        FROM ds_divisions
+        WHERE ds_id = $ds_id";
+        $query = $this->db->query($sql);
+        $row = $query->row();
+        return $row->ds;
+    }
+
+    public function gn_name($id){
+        $sql = "SELECT *
+        FROM gn_divisions
+        WHERE gs_id = $id";
+        $query = $this->db->query($sql);
+        $row = $query->row();
+        return $row->gs;
+    }
+
 }
 
 

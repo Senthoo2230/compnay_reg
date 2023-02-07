@@ -139,7 +139,7 @@
                             <input type="text" name="check_dir" class="form-control" value="director" placeholder="Lastname" hidden>
 
                             <div class="col-md-3">
-                                <input type="submit" class="btn btn-success w-100" value="Add Director">
+                                <input type="submit" class="btn btn-primary w-100" value="Add Director">
                             </div>
                         </div>
                     </form>
@@ -164,7 +164,7 @@
                                 <th>Title</th>
                                 <th>Firstname</th>
                                 <th>Lastname</th>
-                                <th>Action</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
 
@@ -176,9 +176,9 @@
                                     <td><?php echo $dir->title; ?></td>
                                     <td><?php echo $dir->firstname; ?></td>
                                     <td><?php echo $dir->lastname; ?></td>
-                                    <td>
+                                    <td class="text-center">
                                         <a href="<?php echo base_url(); ?>home/delete_director/<?php echo $dir->id; ?>">
-                                            <div class="btn btn-danger btn-sm">Delete</div>
+                                            <div class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></div>
                                         </a>
                                     </td>
                                 </tr>
