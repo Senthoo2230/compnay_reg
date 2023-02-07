@@ -53,44 +53,44 @@
                                     <?php echo form_error('title'); ?>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4 col-lg-3 col-sm-6">
                                 <input type="text" name="fullname" class="form-control" placeholder="Fullname">
                                 <div style="margin-top: 5px; font-size:12px; color:red;">
                                     <?php echo form_error('fullname'); ?>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4 col-lg-3 col-sm-6">
                                 <input type="text" name="address" class="form-control" placeholder="Address">
                                 <div style="margin-top: 5px; font-size:12px; color:red;">
                                     <?php echo form_error('address'); ?>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4 col-lg-3 col-sm-6">
                                 <input type="text" name="email" class="form-control" placeholder="Email">
                                 <div style="margin-top: 5px; font-size:12px; color:red;">
                                     <?php echo form_error('email'); ?>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4 col-lg-3 col-sm-6">
                                 <input type="text" name="city" class="form-control" placeholder="City">
                                 <div style="margin-top: 5px; font-size:12px; color:red;">
                                     <?php echo form_error('city'); ?>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4 col-lg-3 col-sm-6">
                                 <input type="text" name="state" class="form-control" placeholder="State/Region">
                                 <div style="margin-top: 5px; font-size:12px; color:red;">
                                     <?php echo form_error('state'); ?>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4 col-lg-3 col-sm-6">
                                 <input type="text" name="postal" class="form-control" placeholder="Postal">
                                 <div style="margin-top: 5px; font-size:12px; color:red;">
                                     <?php echo form_error('postal'); ?>
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-4 col-lg-3 col-sm-6">
                                 <input type="submit" class="btn btn-primary" value="Add Shareholder" style="width:100%">
                             </div>
                         </div>
