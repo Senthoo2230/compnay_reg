@@ -359,6 +359,16 @@ class Home_model extends CI_Model
         return $count;
     }
 
+    public function check_sh($email){
+        $user_id = $this->session->user_id;
+        $sql = "SELECT *
+        FROM shareholders
+        WHERE user_id = $user_id AND email = '$email'";
+        $query = $this->db->query($sql);
+        $count = $query->num_rows();
+        return $count;
+    }
+
     public function percentage_sum()
     {
         $user_id = $this->session->user_id;

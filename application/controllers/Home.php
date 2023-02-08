@@ -336,7 +336,7 @@ class Home extends CI_Controller
         $this->form_validation->set_rules('title', 'Title', 'required');
         $this->form_validation->set_rules('fullname', 'Fullname', 'required');
         $this->form_validation->set_rules('address', 'Address', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback_check_sh');
         $this->form_validation->set_rules('city', 'City', 'required');
 
         if ($this->form_validation->run() == FALSE) {
@@ -357,6 +357,20 @@ class Home extends CI_Controller
             }
         }
     }
+
+    public function check_sh(){
+        $email = $this->input->post('email');
+        $shs = $this->Home_model->check_sh($email);
+        if ($shs == 0) {
+            return TRUE;
+        }
+        else{
+            $this->form_validation->set_message('check_sh', 'Shareholder already is in!');
+            return FALSE;
+        }
+    }
+
+    
 
     public function secretary()
     {
