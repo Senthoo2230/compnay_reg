@@ -13,7 +13,9 @@ class Home extends CI_Controller
 
     public function index()
     {
-        $this->load->view('home');
+        $data['title'] = "1 First Step – #360 Consultations";
+        $this->load->view('head', $data);
+        $this->load->view('home_new',$data);
     }
     public function getStart()
     {
@@ -30,7 +32,7 @@ class Home extends CI_Controller
         );
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('home');
+            $this->index();
         } else {
             $email = $this->input->post('email');
             $mobile = $this->input->post('mobile');
@@ -44,7 +46,7 @@ class Home extends CI_Controller
                 redirect('home/company_type');
             } else {
                 // Not Inserted
-                $this->load->view('home');
+                $this->index();
             }
         }
     }
